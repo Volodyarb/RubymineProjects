@@ -1,0 +1,13 @@
+class Square
+  def self.test_method
+    puts "Hello from the Square class!"
+    puts "Hello from an instance of class Square!"
+  end
+  def tet_method
+    puts "Hello from !"
+  end
+end
+
+Square.test_method
+
+Square.new.tet_method
