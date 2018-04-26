@@ -2,17 +2,13 @@ require 'pg'
 
 $con = PG.connect :dbname => 'test',:user => 'volodya'
 
-class Peaople
-  attr_accessor :name, :age
-  def vari(name,  age)
-    @name= name
-    @age = age
-  end
+class People
+
 
   def select
     rs= $con.exec("select * from persons ")
     rs.each do |row|
-      puts "%d |%s | %i" % [ row['id'], row['name'], row['age'] ]
+      puts "%-3d |%-10s | %i" % [ row['id'], row['name'], row['age'] ]
     end
   end
   def insert
@@ -26,18 +22,15 @@ class Peaople
     rs.each do |row|
       puts "%s %s %s" % [ row['id'], row['name'], row['age'] ]
     end
-  end
-
   rescue PG::Error => e
     puts e.message
   ensure
+    rs.clear if rs
     $con.close if $con
+  end
+
+
 end
 
-Peaople.new.insert
-
-=begin
-    @con.exec ("select * from persons ") do |rs|
-    rs.each do |row|
-      puts "%d |%s | %i" % [row['id'], row['name'], row['age'] ]
-=end
+#People.new.insert
+#People.new.select
