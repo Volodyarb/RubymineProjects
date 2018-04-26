@@ -8,6 +8,10 @@ begin
   rs.each do |row|
     puts "%d |%s | %i" % [ row['id'], row['name'], row['age'] ]
   end
+
+
+
+
 # Провірка на помилки
 rescue PG::Error => e
   puts e.message
